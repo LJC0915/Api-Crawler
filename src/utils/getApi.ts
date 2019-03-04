@@ -1,13 +1,14 @@
-import {parseSubPage} from "../parsers";
+import {parseApi} from "../parsers";
 import axios from "axios";
 
-export function getAllApiPages(): void {
+export function getApi(pageName: string) {
+  const Domain = "http://api.winner7788u.com/doc/" + pageName;
   axios
-    .get("http://api.winner7788u.com/doc/apiLearnPage_user.php")
+    .get(Domain)
     .then(function(response) {
       // handle success
       if (response.status === 200) {
-        parseSubPage(response.data);
+        parseApi(response.data, pageName);
       }
     })
     .catch(function(error) {

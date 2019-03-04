@@ -1,1 +1,2 @@
-export * from "./getAllApiPages";
+export * from "./getAllApi";
+export * from "./getApi";

@@ -1,5 +1,6 @@
 import {apiPages} from "../data/apiPages";
 import cheerio from "cheerio";
+import {Api} from "../types";
 
 export function parseSubPage(responseData: any): void {
   const $ = cheerio.load(responseData);
@@ -9,6 +10,7 @@ export function parseSubPage(responseData: any): void {
     const parsedPage = parseSubPage("a.btn");
     const title = parsedPage.text();
     const url = parsedPage.attr("href");
-    apiPages.push({title, url});
+    const apis = Array.of<Api>();
+    apiPages.push({title, url, apis});
   });
 }

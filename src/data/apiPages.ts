@@ -16,7 +16,7 @@ export function addApisToPage(pageName: string, apis: Api[]): void {
   }
 }
 
-export function getApiData(apiName: string): any {
+export function getApiData(apiName: string): ApiData {
   let data: ApiData = null;
   const Domain = "http://api.winner7788u.com/doc/";
   apiPages.forEach((page, index) => {
@@ -26,5 +26,8 @@ export function getApiData(apiName: string): any {
       }
     });
   });
+  if (!data) {
+    data = {pageName: "Errol", pageUrl: "#", api: {desc: "沒有這隻 API ～", url: null}};
+  }
   return data;
 }

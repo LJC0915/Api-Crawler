@@ -1,6 +1,6 @@
-import express from "express";
 import axios from "axios";
 import cheerio from "cheerio";
+import express from "express";
 
 const app = express();
 const port = 3000;
@@ -36,10 +36,12 @@ function parseApi(responseData: any): void {
   Apis.each((index, api) => {
     const parseApi = cheerio.load(api);
     const title = parseApi("div div b").text();
-    console.log(title);
     const url = parseApi("div div")
       .first()
-      .text();
-    console.log(url);
+      .contents()
+      .last()
+      .text()
+      .trim();
+    console.log({title, url});
   });
 }

@@ -19,6 +19,7 @@ function crawler() {
       // handle success
       if (response.status === 200) {
         parseApi(response.data);
+        parseSubPage(response.data);
       }
     })
     .catch(function(error) {
@@ -42,6 +43,18 @@ function parseApi(responseData: any): void {
       .last()
       .text()
       .trim();
+    console.log({title, url});
+  });
+}
+
+function parseSubPage(responseData: any): void {
+  const $ = cheerio.load(responseData);
+  const Pages = $(".dropdown-menu li");
+  Pages.each((index, page) => {
+    const parseSubPage = cheerio.load(page);
+    const parsedPage = parseSubPage("a.btn");
+    const title = parsedPage.text();
+    const url = parsedPage.attr("href");
     console.log({title, url});
   });
 }

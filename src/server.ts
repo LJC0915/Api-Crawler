@@ -5,8 +5,13 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-app.get("/pages", (req, res) => {
-  res.send(JSON.stringify(apiPages));
+app.get("/apis", (req, res) => {
+  if (apiPages.length === 0) {
+    getAllApi();
+    res.send("Please refresh the page");
+  } else {
+    res.send(JSON.stringify(apiPages));
+  }
 });
 
 app.get("/updateApi", (req, res) => {

@@ -1,9 +1,13 @@
-import {apiPages, clearApiPages} from "./data/apiPages";
+import {apiPages, clearApiPages, getApiData} from "./data/apiPages";
 import {getAllApi} from "./utils";
 import express from "express";
 
 const app = express();
 const port = 3000;
+
+app.get("/api/:apiName", (req, res) => {
+  res.send(getApiData("/" + req.params.apiName + "/"));
+});
 
 app.get("/apis", (req, res) => {
   if (apiPages.length === 0) {

@@ -15,3 +15,13 @@ export function addApisToPage(pageName: string, apis: Api[]): void {
     apiPages[pageIndex].apis = Array.of<Api>(...apis);
   }
 }
+
+export function getApiData(apiName: string): any {
+  apiPages.forEach((page, index) => {
+    page.apis.forEach((api, i) => {
+      if (api.url.includes(apiName) && api.url.length === apiName.length) {
+        console.log({"page name": page.title, "page url": page.url, api});
+      }
+    });
+  });
+}

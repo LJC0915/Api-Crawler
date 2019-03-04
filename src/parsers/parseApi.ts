@@ -2,7 +2,7 @@ import cheerio from "cheerio";
 import {Api} from "../types";
 import {addApisToPage} from "../data/apiPages";
 
-export function parseApi(responseData: any, pageName: string): void {
+export function parseApi(responseData: any, pageName: string, domain: string): void {
   const $ = cheerio.load(responseData);
   const Apis = $("table.table tr td");
   let apis: Api[] = [];
@@ -14,7 +14,8 @@ export function parseApi(responseData: any, pageName: string): void {
       .contents()
       .last()
       .text()
-      .trim();
+      .trim()
+      .substring(domain.length - 5);
     apis.push({desc, url});
   });
   addApisToPage(pageName, apis);

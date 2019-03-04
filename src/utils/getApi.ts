@@ -2,13 +2,14 @@ import {parseApi} from "../parsers";
 import axios from "axios";
 
 export function getApi(pageName: string) {
-  const Domain = "http://api.winner7788u.com/doc/" + pageName;
+  const Domain = "http://api.winner7788u.com/doc/";
+  const Url = Domain + pageName;
   axios
-    .get(Domain)
+    .get(Url)
     .then(function(response) {
       // handle success
       if (response.status === 200) {
-        parseApi(response.data, pageName);
+        parseApi(response.data, pageName, Domain);
       }
     })
     .catch(function(error) {

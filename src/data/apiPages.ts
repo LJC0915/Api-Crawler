@@ -1,4 +1,4 @@
-import {Api, ApiPage} from "../types/ApiPage";
+import {Api, ApiData, ApiPage} from "../types";
 export let apiPages: ApiPage[] = [];
 
 export function clearApiPages(): void {
@@ -17,11 +17,14 @@ export function addApisToPage(pageName: string, apis: Api[]): void {
 }
 
 export function getApiData(apiName: string): any {
+  let data: ApiData = null;
+  const Domain = "http://api.winner7788u.com/doc/";
   apiPages.forEach((page, index) => {
     page.apis.forEach((api, i) => {
       if (api.url.includes(apiName) && api.url.length === apiName.length) {
-        console.log({"page name": page.title, "page url": page.url, api});
+        data = {pageName: page.title, pageUrl: Domain + page.url, api};
       }
     });
   });
+  return data;
 }

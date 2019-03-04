@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 app.get("/api/:apiName", (req, res) => {
-  res.send(getApiData("/" + req.params.apiName + "/"));
+  res.send(getApiData("/" + req.params.apiName + "/") || "GG");
 });
 
 app.get("/apis", (req, res) => {

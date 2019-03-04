@@ -1,5 +1,4 @@
-import {apiPages} from "./data/apiPages";
-import {ApiPage} from "./types/ApiPage";
+import {apiPages, clearApiPages} from "./data/apiPages";
 import {getAllApiPages} from "./utils";
 import express from "express";
 
@@ -12,8 +11,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/update", (req, res) => {
-  res.send("update");
+  clearApiPages();
   getAllApiPages();
+  res.send("update");
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

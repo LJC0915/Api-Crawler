@@ -1,11 +1,13 @@
 import {apiPages, clearApiPages, getApiData} from "./data/apiPages";
 import {getAllApi} from "./utils";
+import cors from "cors";
 import express from "express";
 import path from "path";
 
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(express.static("dist"));
 
 app.get("/", (req, res) => {
@@ -13,7 +15,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/:apiName", (req, res) => {
-  res.send(getApiData("/" + req.params.apiName + "/"));
+  const response = getApiData("/" + req.params.apiName + "/");
+  console.log({request: req.params.apiName, response});
+  res.send(response);
 });
 
 app.get("/apis", (req, res) => {
@@ -31,4 +35,5 @@ app.get("/updateApi", (req, res) => {
   res.send("updatePage");
 });
 
+getAllApi();
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
